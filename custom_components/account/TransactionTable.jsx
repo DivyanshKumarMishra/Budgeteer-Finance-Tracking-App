@@ -166,7 +166,6 @@ function TransactionTable({ transactions = [], accountId }) {
     setTypeFilter('');
     setRecurringFilter('');
     setSelectedTransactions([]);
-    setFilteredAndSortedTransactions(transactions);
     setActivePage(1);
   };
 
@@ -369,7 +368,8 @@ function TransactionTable({ transactions = [], accountId }) {
                       <span
                         className="px-2 py-1 rounded-sm text-sm text-white"
                         style={{
-                          backgroundColor: categoryColors[category],
+                          backgroundColor:
+                            categoryColors[category?.toLowerCase()],
                         }}
                       >
                         {category}
@@ -426,7 +426,7 @@ function TransactionTable({ transactions = [], accountId }) {
                         <DropdownMenuContent>
                           <DropdownMenuItem
                             onClick={() => {
-                              router.push(`transactions/create?edit${txn.id}`);
+                              router.push(`/transaction/create?edit=${txn.id}`);
                             }}
                           >
                             Edit

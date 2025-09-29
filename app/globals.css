@@ -16,6 +16,10 @@
   @apply hover:bg-gradient-to-r hover:from-green-400 hover:via-teal-400 hover:to-blue-300;
 }
 
+.gradient-text {
+  @apply hover:bg-gradient-to-br hover:from-green-400 hover:via-teal-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -141,4 +145,14 @@
   input[type='number']::-webkit-outer-spin-button {
     @apply bg-background text-foreground;
   }
+}
+
+.transaction-pulse-on-hover:hover {
+  animation: pulse-glow 0.8s ease-out;
+  box-shadow: 0 0 10px #22c55e, 0 0 10px #06b6d4, 0 0 10px #3b82f6;
+}
+
+.link-pulse-on-hover:hover {
+  animation: pulse-glow 0.8s ease-out;
+  box-shadow: 0 0 10px #059669, 0 0 10px #059669, 0 0 10px #059669;
 }

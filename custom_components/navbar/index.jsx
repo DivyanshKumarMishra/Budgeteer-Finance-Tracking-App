@@ -9,7 +9,7 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { Menu } from 'lucide-react';
+import { Menu, Plus } from 'lucide-react';
 
 import {
   SignInButton,
@@ -25,18 +25,24 @@ import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 
 // NavLink component with active/selected logic
-const NavLink = ({ href, children }) => {
+const NavLink = ({ href, children, special = false }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 
   return (
     <Link
       href={href}
-      className={`inline-block px-4 py-2 rounded transition-colors duration-200 ${
-        isActive
-          ? 'bg-accent text-primary-foreground'
-          : 'text-foreground hover:bg-card hover:text-accent'
-      }`}
+      className={`relative inline-block px-4 py-2 rounded transition-all duration-300
+    ${
+      special
+        ? 'bg-gradient-to-br from-green-400 via-teal-400 to-blue-300 transaction-pulse-on-hover text-background hover:font-semibold'
+        : `${
+            isActive
+              ? 'bg-gradient-to-br from-green-400 via-teal-400 to-blue-300 bg-clip-text text-transparent shadow-[0_0_7px_#059669,0_0_7px_#059669,0_0_7px_#059669]'
+              : 'text-accent link-pulse-on-hover gradient-text'
+          }`
+    }
+  `}
     >
       {children}
     </Link>
@@ -44,21 +50,30 @@ const NavLink = ({ href, children }) => {
 };
 
 export const NavLinks = () => (
-  <nav className="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
-    <NavLink href="/dashboard">Dashboard</NavLink>
-    <NavLink href="/budgets">Budgets</NavLink>
-    <NavLink href="/expenses">Expenses</NavLink>
-    <SignedIn>
-      <UserButton />
-    </SignedIn>
-    <SignedOut>
-      <SignInButton>
-        <NavLink href="/sign-in">Sign in</NavLink>
-      </SignInButton>
-      <SignUpButton>
-        <NavLink href="/sign-up">Sign up</NavLink>
-      </SignUpButton>
-    </SignedOut>
+  <nav className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 h-full">
+    <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+      <NavLink href="/dashboard">Dashboard</NavLink>
+      <NavLink href="/transaction/create" special={true}>
+        <span className="flex items-center gap-1">
+          <Plus />
+          Add transaction
+        </span>
+      </NavLink>
+      <SignedOut>
+        <SignInButton>
+          <NavLink href="/sign-in">Sign in</NavLink>
+        </SignInButton>
+        <SignUpButton>
+          <NavLink href="/sign-up">Sign up</NavLink>
+        </SignUpButton>
+      </SignedOut>
+    </div>
+
+    <div className="mt-auto">
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+    </div>
   </nav>
 );
 

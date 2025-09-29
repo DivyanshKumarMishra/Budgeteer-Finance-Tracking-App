@@ -19,3 +19,29 @@ export async function checkUser() {
   if (!db_user) throw new Error('User not found');
   return db_user;
 }
+
+export function calculateNextRecurringDate(startDate, interval) {
+  const date = new Date(startDate);
+
+  switch (interval) {
+    case 'DAILY':
+      date.setDate(date.getDate() + 1);
+      break;
+    case 'WEEKLY':
+      date.setDate(date.getDate() + 7);
+      break;
+    case 'MONTHLY':
+      date.setMonth(date.getMonth() + 1);
+      break;
+    case 'YEARLY':
+      date.setFullYear(date.getFullYear() + 1);
+      break;
+  }
+
+  return date;
+}
+
+export function isTransactionDue(txn) {
+  if (!txn.lastProcessed) return true;
+  return txn.nextRecurringDate <= new Date();
+}

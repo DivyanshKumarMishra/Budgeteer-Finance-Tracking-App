@@ -75,3 +75,17 @@ export async function bulkDeleteTransactions(transactionIds, accId) {
     return { success: false, error: error.message };
   }
 }
+
+export async function getUserAccounts() {
+  try {
+    const db_user = await checkUser();
+
+    const accounts = await prisma.account.findMany({
+      where: { userId: db_user.id },
+    });
+
+    return { success: true, data: accounts.map((acc) => serializeObject(acc)) };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+}

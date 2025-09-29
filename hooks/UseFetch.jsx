@@ -24,7 +24,7 @@ function useFetch(cb) {
         setTimeout(() => {
           setLoading(false);
           setError(null);
-        }, 1000);
+        }, 2000);
       }
     },
     [cb]

@@ -4,7 +4,7 @@ import { RingLoader } from 'react-spinners';
 
 function DashboardLayout({ children }) {
   return (
-    <div className="h-full flex flex-col gap-5 lg:gap-10">
+    <div className="h-full flex flex-col gap-5 lg:gap-10 overflow-y-auto">
       <h2 className="main-heading">Dashboard</h2>
       <Suspense
         fallback={

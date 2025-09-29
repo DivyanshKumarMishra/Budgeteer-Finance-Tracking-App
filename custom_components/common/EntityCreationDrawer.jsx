@@ -32,12 +32,17 @@ const RenderForm = ({ formType, handleDrawer }) => {
       validationSchema={validationSchemas[formType]}
       defaultValues={defaultValues[formType]}
       inputFields={input_fields[formType]}
-      onSubmit={onSubmit}
       loading={createAccountLoading}
       data={newAccount}
-      toastMsg="Account created successfully"
-      handleDrawer={handleDrawer}
+      toastSuccessMsg="Account created successfully"
+      toastErrorMsg="Failed to create account"
+      onSubmit={onSubmit}
       error={createAccountError}
+      handleDrawer={handleDrawer}
+      useDrawerClose={true}
+      className="px-2 md:px-4"
+      submitBtnText="Create Account"
+      loadingVerb="Creating account"
     />
   );
 };

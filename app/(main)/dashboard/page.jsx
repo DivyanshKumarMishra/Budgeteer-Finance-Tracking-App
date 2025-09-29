@@ -1,5 +1,5 @@
 import { getCurrentBudget } from '@/actions/budget';
-import { fetchAccounts } from '@/actions/dashboard';
+import { fetchAccounts, getDashboardData } from '@/actions/dashboard';
 import {
   Card,
   CardContent,
@@ -10,6 +10,7 @@ import {
 import { Switch } from '@/components/ui/switch';
 import EntityCreationDrawer from '@/custom_components/common/EntityCreationDrawer';
 import BudgetProgress from '@/custom_components/dashboard/BudgetProgress';
+import DashboardOverview from '@/custom_components/dashboard/DashboardOverview';
 import { ArrowDownRightIcon, ArrowUpRightIcon, PlusIcon } from 'lucide-react';
 import Link from 'next/link';
 
@@ -85,8 +86,10 @@ async function DashboardPage() {
     budgetData = response.data;
   }
 
+  const { data: transactions } = await getDashboardData();
+
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 mb-5">
       {/* Budget Progress */}
       {defaultAccount && (
         <BudgetProgress
@@ -94,6 +97,9 @@ async function DashboardPage() {
           currentExpenses={budgetData?.currentExpenses || 0}
         />
       )}
+
+      {/* Overview */}
+      <DashboardOverview transactions={transactions} accounts={userAccounts} />
 
       {/* Accounts Grid*/}
       <div className="flex flex-col gap-6 px-4 md:px-6 lg:px-8">

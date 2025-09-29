@@ -48,7 +48,7 @@ function BudgetProgress({ initialBudget, currentExpenses }) {
       toast.success('Budget Updated');
       setIsEditing(false);
     }
-  }, [budgetData, upsertBudgetFn]);
+  }, [budgetLoading]);
 
   useEffect(() => {
     if (budgetError) {
@@ -64,7 +64,7 @@ function BudgetProgress({ initialBudget, currentExpenses }) {
   // console.log(initialBudget, currentExpenses);
 
   return (
-    <div className="px-3 md:px-6 lg:px-8">
+    <div className="px-4 md:px-6 lg:px-8">
       <Card className="w-full">
         <CardHeader className="flex flex-col md:flex-row items-center md:justify-between gap-2">
           <CardTitle className="text-2xl text-center md:text-left text-muted-foreground">

@@ -58,3 +58,22 @@ export async function fetchAccounts() {
     return { success: false, error: error.message };
   }
 }
+
+export async function getDashboardData() {
+  try {
+    const db_user = await checkUser();
+
+    const transactions = await prisma.transaction.findMany({
+      where: { userId: db_user.id },
+      orderBy: { date: 'desc' },
+    });
+
+    return {
+      success: true,
+      data: transactions.map((txn) => serializeObject(txn)),
+    };
+  } catch (error) {
+    console.log(error)
+    return { success: false, error: error.message };
+  }
+}
