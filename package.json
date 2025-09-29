@@ -8,7 +8,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "inngest": "npx inngest-cli@latest dev"
+    "inngest": "npx inngest-cli@latest dev",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@arcjet/inspect": "^1.0.0-beta.12",
